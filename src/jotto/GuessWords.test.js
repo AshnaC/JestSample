@@ -29,4 +29,28 @@ describe("No words guessed", () => {
   });
 });
 
-describe("Words guessed are there", () => {});
+describe("Words guessed are there", () => {
+  const guessedWords = [
+    { word: "train", matchNo: 3 },
+    { word: "bling", matchNo: 2 },
+    { word: "trima", matchNo: 4 }
+  ];
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = setUp({ guessedWords });
+  });
+
+  test("renders wo error", () => {
+    const guessWordComponent = findNodeByAttr(wrapper, "guess-words");
+    expect(guessWordComponent.length).toBe(1);
+  });
+  test("renders guessed words table", () => {
+    const wordListComponent = findNodeByAttr(wrapper, "guess-words-list");
+    expect(wordListComponent.length).toBe(1);    
+  });
+  test("correct number of guessed words", () => {
+    const wordLists = findNodeByAttr(wrapper, "word-item");
+    expect(wordLists.length).toBe(guessedWords.length);
+  });
+});
