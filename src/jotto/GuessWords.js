@@ -7,19 +7,21 @@ const GuessWords = props => {
     content = <span data-test="guess-instruction"> Guess some words </span>;
   } else {
     content = (
-      <table data-test="guess-words-list">
-        <th>
-          <td>Word</td>
-          <td>Number</td>
-        </th>
-        {props.guessedWords.map((item, i) => {
-          return (
-            <tr data-test="word-item" key={i}>
-              <td>{item.word} </td>
-              <td>{item.matchNo}</td>
-            </tr>
-          );
-        })}
+      <table data-test="guess-words-list" className="table table-sm">
+        <tbody>
+          <tr>
+            <th>Word</th>
+            <th>Number</th>
+          </tr>
+          {props.guessedWords.map((item, i) => {
+            return (
+              <tr data-test="word-item" key={i}>
+                <td>{item.word} </td>
+                <td>{item.matchNo}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     );
   }
