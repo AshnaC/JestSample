@@ -51,3 +51,18 @@ describe("word guessed", () => {
     expect(submitButton.length).toBe(0);
   });
 });
+
+describe("Redux props", () => {
+  test("has success as props", () => {
+    const success = true;
+    const wrapper = setUp({ success });
+    const successProp = wrapper.instance().props.success;
+    expect(successProp).toBe(success);
+  });
+  test('has guess word action as function', () => {
+    const wrapper = setUp();
+    const guessWordProp = wrapper.instance().props.guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);    
+  })
+  
+});

@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { hot } from "react-hot-loader";
 import "../styles.css";
-
+import { connect } from "react-redux";
 import GuessWords from "./GuessWords";
-import Congrats from "./Congrats";
+import Congrats from "./congrats";
+import Input from './input';
+import { getSecretWord } from "../actions";
 
 export class App extends Component {
   // static propTypes = {};
@@ -12,17 +14,22 @@ export class App extends Component {
   render() {
     return (
       <div className="container">
-        <Congrats success={true} />
-        <GuessWords
-          guessedWords={[
-            { word: "train", matchNo: 3 },
-            { word: "bling", matchNo: 2 },
-            { word: "trima", matchNo: 4 }
-          ]}
-        />
+        <Congrats success={this.props.success} />
+        <Input/>
+        <GuessWords guessedWords={this.props.guessedWords} />
       </div>
     );
   }
 }
 
-export default hot(module)(App);
+const mapStateToProps = state => {
+  const { guessedWords, success, secretWord } = state;
+  return { guessedWords, success, secretWord };
+};
+
+export default hot(module)(
+  connect(
+    mapStateToProps,
+    { getSecretWord }
+  )(App)
+);
