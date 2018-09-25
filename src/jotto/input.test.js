@@ -85,4 +85,7 @@ describe("On submit", () => {
     const argument = guessWordMock.mock.calls[0][0];
     expect(argument).toBe(guessedWord);
   });
+  test("input box clears on sumbit", () => {
+    expect(wrapper.instance().inputBox.current.value).toBe("");
+  });
 });
