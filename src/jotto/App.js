@@ -5,17 +5,19 @@ import "../styles.css";
 import { connect } from "react-redux";
 import GuessWords from "./GuessWords";
 import Congrats from "./congrats";
-import Input from './input';
+import Input from "./input";
 import { getSecretWord } from "../actions";
 
-export class App extends Component {
-  // static propTypes = {};
+export class UnconnectedApp extends Component {
+  componentDidMount() {
+    this.props.getSecretWord();
+  }
 
   render() {
     return (
       <div className="container">
         <Congrats success={this.props.success} />
-        <Input/>
+        <Input />
         <GuessWords guessedWords={this.props.guessedWords} />
       </div>
     );
@@ -31,5 +33,5 @@ export default hot(module)(
   connect(
     mapStateToProps,
     { getSecretWord }
-  )(App)
+  )(UnconnectedApp)
 );
